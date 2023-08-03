@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Test Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -55,16 +56,18 @@ class _SplashScreen extends State<SplashScreen> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: CustomImageView(
+                radius: BorderRadius.circular(130),
                 margin: EdgeInsets.only(
                     bottom: MediaQuery.of(context).size.height * 0.03),
                 imagePath: ImageConstant.imglogo,
                 height: MediaQuery.of(context).size.height * 0.25,
               ),
             ),
+            const Text("Wilson Wings")
           ],
         ),
       ),
