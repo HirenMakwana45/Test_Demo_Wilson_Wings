@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "748404964606",
+    "project_id": "testdemowilsonwings",
+    "storage_bucket": "testdemowilsonwings.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748404964606:android:0341fe9cbd4de4a29539af",
+        "android_client_info": {
+          "package_name": "com.example.testdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748404964606-7gd133dhvcva0b8r74pj4cdh8odrktnm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1x_hR5FiE-QddMMP40atMU1dNgOhJmB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748404964606-7gd133dhvcva0b8r74pj4cdh8odrktnm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
