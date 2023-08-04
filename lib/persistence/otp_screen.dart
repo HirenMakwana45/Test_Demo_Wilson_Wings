@@ -41,96 +41,84 @@ class _OtpScreenState extends State<OtpScreen> {
     super.initState();
   }
 
-  void verifyOtp() {
-    if (_code.length != 5) {
-      setState(() {
-        _isLoading = false;
-      });
-      setState(() {
-        Fluttertoast.showToast(
-          msg: 'OTP Verify Successfully..',
-          toastLength: Toast.LENGTH_SHORT,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
+  // void verifyOtp() {
+  //   if (_code.length != 5) {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
 
-        _isLoading = false;
-      });
+  //     try {
+  //       setState(() {
+  //         FirebaseAuth _auth = FirebaseAuth.instance;
+  //         final AuthCredential credential = PhoneAuthProvider.credential(
+  //             verificationId: _verificationId, smsCode: _code);
+  //         print("************");
 
-      try {
-        setState(() {
-          FirebaseAuth _auth = FirebaseAuth.instance;
-          final AuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: _verificationId, smsCode: _code);
-          print("************");
+  //         print(_auth);
+  //         print(_code);
+  //         print(_verificationId);
+  //         // print("VERIFY==>"+credential.token.toString());
+  //         _auth.signInWithCredential(credential).then((value) {
+  //           print("PASS==>" + value.toString());
+  //           setState(() {
+  //             Fluttertoast.showToast(
+  //               msg: 'OTP Verify Successfully..',
+  //               toastLength: Toast.LENGTH_SHORT,
+  //               timeInSecForIosWeb: 1,
+  //               backgroundColor: Colors.black,
+  //               textColor: Colors.white,
+  //               fontSize: 16.0,
+  //             );
 
-          print(_auth);
-          print(_code);
-          print(_verificationId);
-          // print("VERIFY==>"+credential.token.toString());
-          _auth.signInWithCredential(credential).then((value) {
-            print("PASS==>" + value.toString());
-            setState(() {
-              Fluttertoast.showToast(
-                msg: 'OTP Verify Successfully..',
-                toastLength: Toast.LENGTH_SHORT,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.black,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
+  //             Navigator.push(
+  //                 context,
+  //                 PageTransition(
+  //                     type: PageTransitionType.fade,
+  //                     child: const HomeScreen()));
+  //             _isLoading = false;
+  //           });
+  //         }, onError: (error) {
+  //           setState(() {
+  //             _isLoading = false;
+  //           });
+  //           print("ERROR==>" + error.toString());
+  //           Fluttertoast.showToast(
+  //             msg: 'Session Expire Please Resend OTP..',
+  //             toastLength: Toast.LENGTH_SHORT,
+  //             timeInSecForIosWeb: 1,
+  //             backgroundColor: Colors.black,
+  //             textColor: Colors.white,
+  //             fontSize: 16.0,
+  //           );
+  //         });
+  //       });
 
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.fade,
-                      child: const HomeScreen()));
-              _isLoading = false;
-            });
-          }, onError: (error) {
-            setState(() {
-              _isLoading = false;
-            });
-            print("ERROR==>" + error.toString());
-            Fluttertoast.showToast(
-              msg: 'Session Expire Please Resend OTP..',
-              toastLength: Toast.LENGTH_SHORT,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              fontSize: 16.0,
-            );
-          });
-        });
-
-        // showCustomToast("===>VERIFY==>"+credential.signInMethod.toString());
-      } catch (e) {
-        Fluttertoast.showToast(
-          msg: "EXCEPTION==>" + e.toString(),
-          toastLength: Toast.LENGTH_SHORT,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-        // showCustomToast("EXCEPTION==>" + e.toString());
-      }
-    } else {
-      Navigator.of(context);
-      // .push(MaterialPageRoute(builder: (context) => CityPage()));
-      Fluttertoast.showToast(
-        msg: "Please Enter OTP",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      // showCustomToast("Please Enter OTP");
-    }
-  }
+  //       // showCustomToast("===>VERIFY==>"+credential.signInMethod.toString());
+  //     } catch (e) {
+  //       Fluttertoast.showToast(
+  //         msg: "EXCEPTION==>" + e.toString(),
+  //         toastLength: Toast.LENGTH_SHORT,
+  //         timeInSecForIosWeb: 1,
+  //         backgroundColor: Colors.black,
+  //         textColor: Colors.white,
+  //         fontSize: 16.0,
+  //       );
+  //       // showCustomToast("EXCEPTION==>" + e.toString());
+  //     }
+  //   } else {
+  //     Navigator.of(context);
+  //     // .push(MaterialPageRoute(builder: (context) => CityPage()));
+  //     Fluttertoast.showToast(
+  //       msg: "Please Enter OTP",
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.black,
+  //       textColor: Colors.white,
+  //       fontSize: 16.0,
+  //     );
+  //     // showCustomToast("Please Enter OTP");
+  //   }
+  // }
 
   Future<void> phoneSignIn({required String phoneNumber}) async {
     setState(() {
@@ -197,13 +185,13 @@ class _OtpScreenState extends State<OtpScreen> {
     setState(() {
       _code = authCredential.smsCode!;
 
-      // Navigator.push(
-      //   context,
-      //   PageTransition(
-      //     type: PageTransitionType.fade,
-      //     child: RootPage(),
-      //   ),
-      // );
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: HomeScreen(),
+        ),
+      );
     });
     if (authCredential.smsCode != null) {
       try {
@@ -262,93 +250,94 @@ class _OtpScreenState extends State<OtpScreen> {
     return null;
   }
 
-  // void verifyOtp() {
-  //   if (_code.length != 5) {
-  //     print("Function Is Calling In Verify Otp");
-  //     print(_code);
+  void verifyOtp() {
+    if (_code.length != 5) {
+      print("Function Is Calling In Verify Otp");
+      print(_code);
 
-  //     try {
-  //       setState(() {
-  //         FirebaseAuth _auth = FirebaseAuth.instance;
-  //         final AuthCredential credential = PhoneAuthProvider.credential(
-  //             verificationId: _verificationId, smsCode: _code);
-  //         print("************");
+      try {
+        setState(() {
+          FirebaseAuth _auth = FirebaseAuth.instance;
+          final AuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: _verificationId, smsCode: _code);
+          print("************");
 
-  //         print(_auth);
-  //         print(_code);
-  //         print(_verificationId);
-  //         // print("VERIFY==>"+credential.token.toString());
-  //         _auth.signInWithCredential(credential).then((value) {
-  //           print("PASS==>" + value.toString());
-  //           setState(() {
-  //             Fluttertoast.showToast(
-  //               msg: 'OTP Verify Successfully..',
-  //               toastLength: Toast.LENGTH_SHORT,
-  //               timeInSecForIosWeb: 1,
-  //               backgroundColor: Colors.black,
-  //               textColor: Colors.white,
-  //               fontSize: 16.0,
-  //             );
-  //             callApi();
+          print(_auth);
+          print(_code);
+          print(_verificationId);
+          // print("VERIFY==>"+credential.token.toString());
+          _auth.signInWithCredential(credential).then((value) {
+            print("PASS==>" + value.toString());
+            setState(() {
+              Fluttertoast.showToast(
+                msg: 'OTP Verify Successfully..',
+                toastLength: Toast.LENGTH_SHORT,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.black,
+                textColor: Colors.white,
+                fontSize: 16.0,
+              );
 
-  //             // Navigator.push(
-  //             //     context,
-  //             //     PageTransition(
-  //             //         type: PageTransitionType.fade, child: const RootPage()));
-  //             _isLoading = false;
-  //           });
-  //         }, onError: (error) {
-  //           setState(() {
-  //             _isLoading = false;
-  //           });
-  //           print("ERROR ==>" + error.toString());
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      child: const HomeScreen()));
+              _isLoading = false;
+            });
+          }, onError: (error) {
+            setState(() {
+              _isLoading = false;
+            });
+            print("ERROR ==>" + error.toString());
 
-  //           Fluttertoast.showToast(
-  //             msg: 'Session Expire Please Resend OTP..',
-  //             toastLength: Toast.LENGTH_SHORT,
-  //             timeInSecForIosWeb: 1,
-  //             backgroundColor: Colors.black,
-  //             textColor: Colors.white,
-  //             fontSize: 16.0,
-  //           );
-  //         });
-  //       });
+            Fluttertoast.showToast(
+              msg: 'Session Expire Please Resend OTP..',
+              toastLength: Toast.LENGTH_SHORT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+          });
+        });
 
-  //       // showCustomToast("===>VERIFY==>"+credential.signInMethod.toString());
-  //     } catch (e) {
-  //       print("In Catch????");
-  //       setState(() {
-  //         Fluttertoast.showToast(
-  //           msg: "EXCEPTION==>" + e.toString(),
-  //           toastLength: Toast.LENGTH_SHORT,
-  //           timeInSecForIosWeb: 1,
-  //           backgroundColor: Colors.black,
-  //           textColor: Colors.white,
-  //           fontSize: 16.0,
-  //         );
-  //       });
+        // showCustomToast("===>VERIFY==>"+credential.signInMethod.toString());
+      } catch (e) {
+        print("In Catch????");
+        setState(() {
+          Fluttertoast.showToast(
+            msg: "EXCEPTION==>" + e.toString(),
+            toastLength: Toast.LENGTH_SHORT,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        });
 
-  //       // showCustomToast("EXCEPTION==>" + e.toString());
-  //     }
-  //   } else {
-  //     setState(() {
-  //       print("Kucch To Gadbad He ");
+        // showCustomToast("EXCEPTION==>" + e.toString());
+      }
+    } else {
+      setState(() {
+        print("Kucch To Gadbad He ");
 
-  //       // Navigator.of(context);
-  //       // .push(MaterialPageRoute(builder: (context) => CityPage()));
-  //       Fluttertoast.showToast(
-  //         msg: "Please Enter OTP",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         timeInSecForIosWeb: 1,
-  //         backgroundColor: Colors.black,
-  //         textColor: Colors.white,
-  //         fontSize: 16.0,
-  //       );
-  //     });
+        // Navigator.of(context);
+        // .push(MaterialPageRoute(builder: (context) => CityPage()));
+        Fluttertoast.showToast(
+          msg: "Please Enter OTP",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      });
 
-  //     // showCustomToast("Please Enter OTP");
-  //   }
-  // }
+      // showCustomToast("Please Enter OTP");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -447,12 +436,48 @@ class _OtpScreenState extends State<OtpScreen> {
                         print("Final Otp Is " + _code);
                         print("Verification Code is" +
                             varificationCode.toString());
-                        verifyOtp();
                       },
                     );
 
                     print("Completed: " + pin);
                   },
+                ),
+              ),
+              SizedBox(
+                height: h * 0.2,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(w * 0.75, h * 0.06),
+                    // minimumSize: Size(w * 0.05, h * 0.06),
+                    backgroundColor: const Color.fromARGB(255, 111, 192, 128),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40))),
+                onPressed: () {
+                  setState(() {
+                    verifyOtp();
+                  });
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Verify',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontSize: h * 0.029),
+                    ),
+                    SizedBox(
+                      width: w * 0.04,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: h * 0.035,
+                    )
+                  ],
                 ),
               ),
             ],
